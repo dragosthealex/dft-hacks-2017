@@ -29,9 +29,7 @@ Route::get('/oauth/callback/{provider}', 'Auth\OAuthController@handleProviderCal
 Route::get('/oauth/success/{provider}', 'Auth\OAuthController@success');
 
 Route::get('/', function () {
-    if(Auth::check()) {
-        return redirect()->to('/home');
-    }
-    return view('welcome');
+    return redirect()->to('/home');
 });
 Route::get('/home', 'HomeController@index');
+Route::get('/map', 'HomeController@map');

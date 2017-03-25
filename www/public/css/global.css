@@ -1,0 +1,7 @@
+.site_title {
+    display: block;
+    padding: 0 10px;
+}
+.site_title .logo {
+    width: 100%;
+}
