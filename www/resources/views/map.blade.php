@@ -44,10 +44,8 @@ var initMap = function() {
       zoom: 12,
       center: uluru
     });
-    var marker = new google.maps.Marker({
-      position: uluru,
-      map: map
-    });
+    map.data.loadGeoJson(
+      '{{ url("/milan-grid.geojson") }}');
 }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<?=env('MAPS_API_KEY')?>&callback=initMap">
