@@ -12,7 +12,7 @@
     margin: 30px 30px 0;
 }
 #map {
-    height: 500px;
+    height: 100vh;
     width: 100%;
 }
 </style>
@@ -24,13 +24,11 @@
 
 @section('content')
 <div class="row">
-    <h1 class="dash-title">Map</h1>
-    <div class="col-md-10 col-md-offset-1 padded">
-        <p>Data stuff</p>
-        <div id="map-container">
-            <div id="map"></div>
-        </div>
-    </div>
+    <div class="col-md-12">
+
+  <div id="map"></div>
+
+</div>
 </div>
 @endsection
 
@@ -41,9 +39,14 @@ var map;
 var initMap = function() {
     var uluru = {lat: 45.466565, lng: 9.185970};
     map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 12,
+      zoom: 14,
       center: uluru
     });
+    map.data.setStyle({
+        fillColor: 'transparent',
+        strokeColor: '#ffffff',
+  strokeWeight: '0.5'
+});
     map.data.loadGeoJson(
       '{{ url("/milan-grid.geojson") }}');
 }
@@ -51,9 +54,4 @@ var initMap = function() {
 <script src="https://maps.googleapis.com/maps/api/js?key=<?=env('MAPS_API_KEY')?>&callback=initMap">
 </script>
 <script type="text/javascript"></script>
-$(document).ready(function () {
-
-    $('.datatables').DataTable();
-});     
-</script>
 @endsection
