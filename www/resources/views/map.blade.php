@@ -46,6 +46,13 @@ var initMap = function() {
     });
     map.data.loadGeoJson(
       '{{ url("/milan-grid.geojson") }}');
+    map.data.setStyle(function(feature) {
+        if(feature.getId() == "0") {
+            return {
+                fillColor: "green"
+            }
+        }
+    });
 }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<?=env('MAPS_API_KEY')?>&callback=initMap">
