@@ -1,16 +1,22 @@
 
-html , body{
-	
- height:100%;
- 
+html, body, .container,  #map {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
- 
+
+.logo {
+	width: 100px;
+	height: auto
+}
+
 .full-width {
-	
+
  width:100%;
- 
+
  }
- 
+
 .full-height{
  height:100%;
  }
@@ -144,7 +150,7 @@ html , body{
     padding: 0 0 4px 0
 }
 .left_col {
-    background: #2A3F54
+    background: #ffffff
 }
 .nav-sm .container.body .col-md-3.left_col {
     min-height: 100%;
@@ -202,7 +208,7 @@ html , body{
 .nav-sm ul.nav.child_menu ul,
 .nav-sm .nav.side-menu li.active-sm ul ul {
     position: static;
-    width: 200px;
+    width: 300px;
     background: none
 }
 .nav-sm>.nav.side-menu>li.active-sm>a {
@@ -321,10 +327,10 @@ html , body{
     display: inline-block
 }
 .nav_menu {
+	height: 60px;
     float: left;
-    background: #EDEDED;
+    background: #ffffff;
     border-bottom: 1px solid #D9DEE4;
-    margin-bottom: 10px;
     width: 100%;
     position: relative
 }
@@ -335,7 +341,7 @@ html , body{
 }
 .nav-md .container.body .col-md-3.left_col {
     min-height: 100%;
-    width: 230px;
+    width: 300px;
     padding: 0;
     position: absolute;
     display: -ms-flexbox;
@@ -350,13 +356,13 @@ body .container.body .right_col {
     background: #F7F7F7
 }
 .nav-md .container.body .right_col {
-    padding: 10px 20px 0;
-    margin-left: 230px
+    margin-left: 300px;
+	height: 100vh;
 }
 .nav_title {
     width: 230px;
     float: left;
-    background: #2A3F54;
+    background: #ffffff;
     border-radius: 0;
     height: 57px
 }
@@ -364,6 +370,7 @@ body .container.body .right_col {
     .nav-md .container.body .right_col,
     .nav-md .container.body .top_nav {
         width: 100%;
+		height: 100%;
         margin: 0
     }
     .nav-md .container.body .col-md-3.left_col {
@@ -627,12 +634,17 @@ table.no-margin .progress {
     position: relative;
     min-height: 1px;
     float: left;
-    padding-right: 10px;
-    padding-left: 10px
+    padding-right: 0px;
+    padding-left: 0px
+}
+#map {
+    position: relative;
+    margin: 0;
+    padding: 0;
 }
 .row {
-    margin-right: -10px;
-    margin-left: -10px
+    margin-right: 0px;
+    margin-left: 0px
 }
 .grid_slider .col-md-6 {
     padding: 0 40px
@@ -724,7 +736,7 @@ a:focus {
     margin-bottom: 6px
 }
 .nav.side-menu>li>a:hover {
-    color: #F2F5F7 !important
+    color: #000000 !important
 }
 .nav.side-menu>li>a:hover,
 .nav>li>a:focus {
@@ -736,7 +748,7 @@ a:focus {
 }
 .nav.child_menu li:hover,
 .nav.child_menu li.active {
-    background-color: rgba(255, 255, 255, 0.06)
+    background-color: rgba(0, 0, 0)
 }
 .nav.child_menu li {
     padding-left: 36px
@@ -764,7 +776,7 @@ a:focus {
 }
 .nav.side-menu>li>a,
 .nav.child_menu>li>a {
-    color: #E7E7E7;
+    color: #000000;
     font-weight: 500
 }
 .nav.child_menu li li:hover,
@@ -4233,7 +4245,7 @@ ul.notifications {
 table thead .checkbox { margin-top:-7px;margin-top:-21px; }
 table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
 */
-			
+
 .daterangepicker.xdisplay { width:228px; }
 
 .dataTables_wrapper > .row{

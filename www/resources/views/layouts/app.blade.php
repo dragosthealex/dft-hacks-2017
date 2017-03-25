@@ -10,17 +10,7 @@
 
     <title>@yield('title')</title>
     <link href="{{ asset('/vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('/vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('/vendors/nprogress/nprogress.css') }}" rel="stylesheet">
-    <link href="{{ asset('/vendors/iCheck/skins/flat/green.css') }}" rel="stylesheet">
-    <link href="{{ asset('/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('/vendors/jqvmap/dist/jqvmap.min.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('/vendors/google-code-prettify/bin/prettify.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('/vendors/select2/dist/css/select2.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('/vendors/switchery/dist/switchery.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('/vendors/starrr/dist/starrr.css') }}" rel="stylesheet">
-    <link href="{{ asset('/vendors/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
-    <link href="{{ asset('/build/css/custom.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/build/css/custom.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/global.css') }}">
     @yield('css')
     @yield('pre-scripts')
@@ -37,7 +27,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="{{ url('/') }}" class="site_title"><img class="logo" src="{{ asset('img/logo-white.svg') }}"></a>
+              <a href="{{ url('/') }}" class="site_title"><img class="logo" src="{{ asset('img/streamflow-logo.svg') }}"></a>
             </div>
 
             <div class="clearfix"></div>
@@ -45,14 +35,11 @@
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                <h3>General</h3>
                 <ul class="nav side-menu">
+
                   <li>
-                    <a href="{{ url('/') }}"><i class="fa fa-home"></i> Home</span></a>
+                    <a href="{{ url('/map') }}"><img src='https://icon.now.sh/map/24/000000' alt='map icon' /> Map</span></a>
                   </li>
-                  <li>
-                    <a href="{{ url('/map') }}"><i class="fa fa-map"></i> Map</span></a>
-                  </li>                  
                 </ul>
               </div>
             </div>
@@ -60,40 +47,9 @@
           </div>
         </div>
 
-        <!-- top navigation -->
-        <div class="top_nav">
-          <div class="nav_menu">
-            <nav>
-              <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-              </div>
-              @if(Auth::check())
-              <ul class="nav navbar-nav navbar-right">
-                <li class="">
-                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <?=Auth::user()->name?>
-                    <span class=" fa fa-angle-down') }}"></span>
-                  </a>
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-                  </ul>
-                </li>
-              </ul>
-              @else
-              <ul class="nav navbar-nav navbar-right">
-                <li class="">
-                  <a href="{{ url('/login') }}" class="user-profile">
-                    Login with Facebook
-                  </a>
-                </li>
-              </ul>
-              @endif
-            </nav>
-          </div>
-        </div>
-        <!-- /top navigation -->
+    
         <!-- page content -->
-        <div class="right_col" role="main">
+        <div class="right_col" role="main" height="100%">
 
         @yield('content')
 
@@ -101,12 +57,7 @@
 <!-- /page content -->
 
 <!-- footer content -->
-<footer>
-  <div class="pull-right">
-    <?=config('app.name')?>
-  </div>
-  <div class="clearfix"></div>
-</footer>
+
 <!-- /footer content -->
 </div>
 </div>
