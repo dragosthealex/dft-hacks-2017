@@ -19,6 +19,7 @@
     width: 100%;
     padding: 5px;
     height: 20vh;
+    background: #151515;
 }
 .demo-placeholder {
 -khtml-user-select: none;
@@ -55,11 +56,11 @@ console.log(stations)
 var initMap = function() {
     var uluru = {lat: 45.483640, lng: 9.186667};
     map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 15,
+      zoom: 13,
       clickableIcons: false,
       keyboardShortcuts: false,
       maxZoom: 17,
-      minZoom: 15,
+      minZoom: 13,
       rotateControl: false,
       streetView: false,
       streetViewControl: false,
@@ -68,55 +69,37 @@ var initMap = function() {
       styles:
       [
     {
-        "featureType": "administrative",
+        "featureType": "all",
         "elementType": "labels.text.fill",
         "stylers": [
             {
-                "color": "#444444"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape",
-        "elementType": "all",
-        "stylers": [
+                "saturation": 36
+            },
             {
-                "color": "#f2f2f2"
+                "color": "#000000"
+            },
+            {
+                "lightness": 40
             }
         ]
     },
     {
-        "featureType": "poi",
-        "elementType": "all",
+        "featureType": "all",
+        "elementType": "labels.text.stroke",
         "stylers": [
             {
                 "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "all",
-        "stylers": [
-            {
-                "saturation": -100
             },
             {
-                "lightness": 45
-            }
-        ]
-    },
-    {
-        "featureType": "road.highway",
-        "elementType": "all",
-        "stylers": [
+                "color": "#000000"
+            },
             {
-                "visibility": "simplified"
+                "lightness": 16
             }
         ]
     },
     {
-        "featureType": "road.arterial",
+        "featureType": "all",
         "elementType": "labels.icon",
         "stylers": [
             {
@@ -125,9 +108,135 @@ var initMap = function() {
         ]
     },
     {
-        "featureType": "transit",
-        "elementType": "all",
+        "featureType": "administrative",
+        "elementType": "geometry.fill",
         "stylers": [
+            {
+                "color": "#000000"
+            },
+            {
+                "lightness": 20
+            }
+        ]
+    },
+    {
+        "featureType": "administrative",
+        "elementType": "geometry.stroke",
+        "stylers": [
+            {
+                "color": "#000000"
+            },
+            {
+                "lightness": 17
+            },
+            {
+                "weight": 1.2
+            },
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "landscape",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#000000"
+            },
+            {
+                "lightness": "-51"
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#000000"
+            },
+            {
+                "lightness": 21
+            },
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#000000"
+            },
+            {
+                "lightness": 17
+            },
+            {
+                "gamma": "1"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "geometry.stroke",
+        "stylers": [
+            {
+                "color": "#000000"
+            },
+            {
+                "lightness": 29
+            },
+            {
+                "weight": 0.2
+            },
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#000000"
+            },
+            {
+                "lightness": 18
+            },
+            {
+                "gamma": "1"
+            }
+        ]
+    },
+    {
+        "featureType": "road.local",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#000000"
+            },
+            {
+                "lightness": 16
+            },
+            {
+                "gamma": "1"
+            }
+        ]
+    },
+    {
+        "featureType": "transit",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#000000"
+            },
+            {
+                "lightness": 19
+            },
             {
                 "visibility": "off"
             }
@@ -135,13 +244,13 @@ var initMap = function() {
     },
     {
         "featureType": "water",
-        "elementType": "all",
+        "elementType": "geometry",
         "stylers": [
             {
-                "color": "#46bcec"
+                "color": "#000000"
             },
             {
-                "visibility": "on"
+                "lightness": 17
             }
         ]
     }
@@ -150,16 +259,17 @@ var initMap = function() {
     map.data.loadGeoJson(
       '{{ url("/milan-grid.geojson") }}');
 
+
     var first_unix = 0,
     heatmap = {
-        "1": "#9ABF00",
-        "2": "#C2AD00",
-        "3": "#C67400",
-        "4": "#CA3A00",
-        "5": "#D20041",
-        "6": "#D900C6",
-        "7": "#6D00E1",
-        "8": "#2A00E5",
+        "8": "rgba(74,20,134, 0.6)",
+        "7": "rgba(106,81,163, 0.6)",
+        "6": "rgba(128,125,186, 0.6)",
+        "5": "rgba(158,154,200, 0.6)",
+        "4": "rgba(188,189,220, 0.6)",
+        "3": "rgba(218,218,235, 0.4)",
+        "2": "rgba(239,237,245, 0.3)",
+        "1": "rgba(252,251,253, 0.2)",
     },
     get_sorted_keys = function() {
         var a = day;
@@ -192,6 +302,7 @@ var initMap = function() {
                 // Color heatmap
                 return {
                     fillColor: heatmap[zn["level"]],
+                    fillOpacity: '1',
                     strokeColor: stroke,
                     strokeWeight: sWeight
                 }
@@ -222,11 +333,11 @@ var initMap = function() {
         // Create plot after video meta is loaded
         var options = {
                 series: {
-                    curvedLines: {active: true}
+
                 },
                 cursors: [{
                     name: 'Player',
-                    color: 'red',
+                    color: '#00BEFF',
                     mode: 'x',
                     showIntersections: false,
                     symbol: 'triangle',
@@ -243,31 +354,43 @@ var initMap = function() {
                 yaxis: {
                     min: 0,
                     max: 100
+                    backgroundColor: '#151515',
                 },
+                shadowSize: 0,
                 clickable: false,
                 hoverable: false,
-                grid: {}
+                grid: {
+                    backgroundColor: '#151515',
+                    borderWidth: 0,
+                    margin: 20,
+                },
+                margin: {
+                    top: 10,
+                    left: 10,
+                    bottom: 10,
+                    right: 10
+    }
             },
             doPlot = function() {
                 // keep reference
                 $.plot($("#graph"), [
                 {
                     data: graphData["today"],
-                    lines: { show: true, lineWidth: 2},
-                    curvedLines: {apply: true, tension: 0.5},
-                    color: "red"
+                    lines: { show: true, lineWidth: 1},
+                    curvedLines: {apply: false},
+                    color: "#f9f9f9"
                 },
                 {
                     data: graphData["today"],
-                    color: '#f03b20',
-                    points: {show: true},
+                    color: 'transparent',
+                    points: {show: false},
                 }], options);
                 $("#graph").bind("cursorupdates", function(event, cursordata) {
                     var index = Math.floor(cursordata[0].x),
                         unix = parseInt(first_unix) + 600 * index;
                     if (last_x != index) {
                         last_x = index;
-                        set_style(unix);    
+                        set_style(unix);
                     }
                 });
             };
