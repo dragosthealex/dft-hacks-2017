@@ -12,14 +12,25 @@
     margin: 30px 30px 0;
 }
 #map {
-    height: 100vh;
+    height: 80vh;
     width: 100%;
+}
+#graph {
+    width: 100%;
+    padding: 5px;
+    height: 20vh;
+}
+.demo-placeholder {
+-khtml-user-select: none;
+-o-user-select: none;
+-moz-user-select: none;
+-webkit-user-select: none;
+user-select: none;
 }
 </style>
 @endsection
 
 @section('pre-scripts')
-
 @endsection
 
 @section('content')
@@ -27,6 +38,7 @@
     <div class="col-md-12">
 
   <div id="map"></div>
+  <div id="graph" class="video-placeholder demo-placeholder"></div>
 
 </div>
 </div>
@@ -36,141 +48,75 @@
 <script type="text/javascript" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
 var map;
+var stations = JSON.parse("<?=addcslashes(file_get_contents(url('json/stations.json')), '"')?>");
+var day = JSON.parse("<?=addcslashes(file_get_contents(url('json/m_' . $day . '.json')), '"')?>");
+console.log(day)
+console.log(stations)
 var initMap = function() {
     var uluru = {lat: 45.466565, lng: 9.185970};
     map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 14,
+      zoom: 15,
+      clickableIcons: false,
+      keyboardShortcuts: false,
+      maxZoom: 17,
+      minZoom: 15,
+      rotateControl: false,
+      streetView: false,
+      streetViewControl: false,
+      mapTypeControl: false,
       center: uluru,
       styles:
       [
     {
-        "featureType": "water",
-        "elementType": "geometry",
+        "featureType": "administrative",
+        "elementType": "labels.text.fill",
         "stylers": [
             {
-                "color": "#e9e9e9"
-            },
-            {
-                "lightness": 17
+                "color": "#444444"
             }
         ]
     },
     {
         "featureType": "landscape",
-        "elementType": "geometry",
+        "elementType": "all",
         "stylers": [
             {
-                "color": "#f5f5f5"
-            },
-            {
-                "lightness": 20
-            }
-        ]
-    },
-    {
-        "featureType": "road.highway",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "color": "#ffffff"
-            },
-            {
-                "lightness": 17
-            }
-        ]
-    },
-    {
-        "featureType": "road.highway",
-        "elementType": "geometry.stroke",
-        "stylers": [
-            {
-                "color": "#ffffff"
-            },
-            {
-                "lightness": 29
-            },
-            {
-                "weight": 0.2
-            }
-        ]
-    },
-    {
-        "featureType": "road.arterial",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "color": "#ffffff"
-            },
-            {
-                "lightness": 18
-            }
-        ]
-    },
-    {
-        "featureType": "road.local",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "color": "#ffffff"
-            },
-            {
-                "lightness": 16
+                "color": "#f2f2f2"
             }
         ]
     },
     {
         "featureType": "poi",
-        "elementType": "geometry",
+        "elementType": "all",
         "stylers": [
             {
-                "color": "#f5f5f5"
-            },
-            {
-                "lightness": 21
+                "visibility": "off"
             }
         ]
     },
     {
-        "featureType": "poi.park",
-        "elementType": "geometry",
+        "featureType": "road",
+        "elementType": "all",
         "stylers": [
             {
-                "color": "#dedede"
+                "saturation": -100
             },
             {
-                "lightness": 21
+                "lightness": 45
             }
         ]
     },
     {
-        "elementType": "labels.text.stroke",
+        "featureType": "road.highway",
+        "elementType": "all",
         "stylers": [
             {
-                "visibility": "on"
-            },
-            {
-                "color": "#ffffff"
-            },
-            {
-                "lightness": 16
+                "visibility": "simplified"
             }
         ]
     },
     {
-        "elementType": "labels.text.fill",
-        "stylers": [
-            {
-                "saturation": 36
-            },
-            {
-                "color": "#333333"
-            },
-            {
-                "lightness": 40
-            }
-        ]
-    },
-    {
+        "featureType": "road.arterial",
         "elementType": "labels.icon",
         "stylers": [
             {
@@ -180,61 +126,112 @@ var initMap = function() {
     },
     {
         "featureType": "transit",
-        "elementType": "geometry",
+        "elementType": "all",
         "stylers": [
             {
-                "color": "#f2f2f2"
-            },
-            {
-                "lightness": 19
+                "visibility": "off"
             }
         ]
     },
     {
-        "featureType": "administrative",
-        "elementType": "geometry.fill",
+        "featureType": "water",
+        "elementType": "all",
         "stylers": [
             {
-                "color": "#fefefe"
+                "color": "#46bcec"
             },
             {
-                "lightness": 20
-            }
-        ]
-    },
-    {
-        "featureType": "administrative",
-        "elementType": "geometry.stroke",
-        "stylers": [
-            {
-                "color": "#fefefe"
-            },
-            {
-                "lightness": 17
-            },
-            {
-                "weight": 1.2
+                "visibility": "on"
             }
         ]
     }
 ]
     });
-    map.data.setStyle({
-        fillColor: 'transparent',
-        strokeColor: '#ffffff',
-  strokeWeight: '0.5'
-});
-
     map.data.loadGeoJson(
       '{{ url("/milan-grid.geojson") }}');
     map.data.setStyle(function(feature) {
-        if(feature.getId() == "0") {
+        if(feature.getId() == "6058") {
             return {
-                fillColor: "green"
+                fillColor: "red",
+                clickable: true,
             }
         }
     });
+    var processData = function(zone_id) {
+        var a = day;
+        var graphData = {
+          "today": [],
+          "control": []
+        };
+        var keys = []
+        for(var k in a) {
+            if(a.hasOwnProperty(k)) {
+                keys.push(k);
+            }
+        }
+        keys.sort();
+
+        for(var i=0; i<keys.length; i++) {
+            var k = keys[i];
+            graphData["today"].push([i, a[k][zone_id]["density"]]);
+        }
+        return graphData;
+    },
+    makeThePlot = function(zone_id) {
+        graphData = processData(zone_id);
+        // Create plot after video meta is loaded
+        var options = {
+                series: {
+                    curvedLines: {active: true}
+                },
+                cursors: [{
+                    name: 'Player',
+                    color: 'red',
+                    mode: 'x',
+                    showIntersections: false,
+                    symbol: 'triangle',
+                    showValuesRelativeToSeries: 0,
+                    position: {
+                        x: 0.0,
+                        y: 0.5
+                    },
+                    snapToPlot: 0
+                }],
+                xaxis: {
+                    min: 0,
+                },
+                yaxis: {
+                    min: 0
+                },
+                clickable: false,
+                hoverable: false,
+                grid: {}
+            },
+            doPlot = function() {
+                // keep reference
+                $.plot($("#graph"), [
+                {
+                    data: graphData["today"],
+                    lines: { show: true, lineWidth: 2},
+                    curvedLines: {apply: true, tension: 0.5},
+                    color: "red"
+                },
+                {
+                    data: graphData["today"],
+                    color: '#f03b20',
+                    points: {show: true},
+                }], options);
+            };
+        doPlot();
+    };
+    // Add evt listener
+    map.data.addListener("click", function(event) {
+        makeThePlot(event.feature.getId());
+        console.log(event.feature.getId());
+    });
+    makeThePlot(6058);
 }
+
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<?=env('MAPS_API_KEY')?>&callback=initMap">
 </script>

@@ -38,7 +38,11 @@
                 <ul class="nav side-menu">
 
                   <li>
-                    <a href="{{ url('/map') }}"><img src='https://icon.now.sh/map/24/000000' alt='map icon' /> Map</span></a>
+                    <a href="{{ url('/map/1105') }}"><img src='https://icon.now.sh/map/24/000000' alt='map icon' /> 11.05.2013</span></a>
+                    <a href="{{ url('/map/1106') }}"><img src='https://icon.now.sh/map/24/000000' alt='map icon' /> 11.06.2013</span></a>
+                    <a href="{{ url('/map/1107') }}"><img src='https://icon.now.sh/map/24/000000' alt='map icon' /> 11.07.2013</span></a>
+                    <a href="{{ url('/map/1114') }}"><img src='https://icon.now.sh/map/24/000000' alt='map icon' /> 11.14.2013</span></a>
+                    <a href="{{ url('/map/1117') }}"><img src='https://icon.now.sh/map/24/000000' alt='map icon' /> 11.17.2013</span></a>
                   </li>
                 </ul>
               </div>

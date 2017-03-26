@@ -32,4 +32,4 @@ Route::get('/', function () {
     return redirect()->to('/map');
 });
 Route::get('/home', 'HomeController@index');
-Route::get('/map', 'HomeController@map');
+Route::get('/map/{day}', 'HomeController@map');
