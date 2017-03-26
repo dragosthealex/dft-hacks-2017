@@ -11,6 +11,27 @@ html, body, .container,  #map {
 	height: auto
 }
 
+ul.station {
+	list-style: none;
+    padding: 0;
+}
+
+.station>li {
+    text-transform: capitalize;
+    color: #fff;
+    font-family: Roboto-Mono, monospace;
+    margin: 0 0 8px 0;
+    font-size: 14px;
+}
+
+.station.li.span {
+    text-transform: capitalize;
+    color: #000;
+    font-family: Roboto-Mono, monospace;
+    margin: 0 0 8px 0;
+    font-size: 14px;
+}
+
 .station_icon {
 	width: 32px;
 	height: 100px;
