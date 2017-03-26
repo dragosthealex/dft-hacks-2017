@@ -49,6 +49,7 @@ user-select: none;
 <script type="text/javascript" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
 var map;
+var thePlot;
 var stations = JSON.parse("<?=addcslashes(file_get_contents(url('json/stations.json')), '"')?>");
 var day = JSON.parse("<?=addcslashes(file_get_contents(url('json/m_' . $day . '.json')), '"')?>");
 console.log(day)
@@ -385,12 +386,33 @@ var initMap = function() {
                     color: 'transparent',
                     points: {show: false},
                 }], options);
-                $("#graph").bind("cursorupdates", function(event, cursordata) {
+                thePlot = $("#graph").bind("cursorupdates", function(event, cursordata) {
                     var index = Math.floor(cursordata[0].x),
                         unix = parseInt(first_unix) + 600 * index;
                     if (last_x != index) {
                         last_x = index;
                         set_style(unix);
+                    }
+                });
+                $("#play-button").click(function() {
+                    if($(this).attr("data-status") == "playing") {
+                        // Stop
+                        console.log("stopping...")
+                        clearInterval($(this).attr("data-interval-id"));
+                        $(this).attr("data-status", "stopped");
+                    } else {
+                        // Play
+                        console.log("playing...")
+                        intervalId = setInterval(function() {
+                            thePlot.setCursor(thePlot.getCursors()[0], {
+                                position: {
+                                    x: last_x + 1,
+                                    y: 0.5
+                                }
+                            });
+                        }, 100);
+                        $(this).attr("data-status", "playing");
+                        $(this).attr("data-interval-id", intervalId);
                     }
                 });
             };
