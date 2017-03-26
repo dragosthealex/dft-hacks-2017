@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:ns="&amp;#38;ns_sfw;"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="Milano"
+   x="0px"
+   y="0px"
+   width="220.232px"
+   height="146.789px"
+   viewBox="0 0 220.232 146.789"
+   enable-background="new 0 0 220.232 146.789"
+   xml:space="preserve"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="Milano_linea_M5.svg"><defs
+   id="defs13" /><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1366"
+   inkscape:window-height="705"
+   id="namedview11"
+   showgrid="false"
+   inkscape:zoom="1.6077499"
+   inkscape:cx="217.09781"
+   inkscape:cy="73.394502"
+   inkscape:window-x="-8"
+   inkscape:window-y="-8"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Milano" />
+<metadata
+   id="metadata3">
+	<ns:sfw>
+		<ns:slices />
+		<ns:sliceSourceBounds
+   x="310.874"
+   y="224.245"
+   width="220.188"
+   height="146.789"
+   bottomLeftOrigin="true" />
+	</ns:sfw>
+<rdf:RDF><cc:Work
+     rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+       rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata>
+<path
+   fill="#A494C1"
+   d="M220.232,134.547c0,6.766-5.491,12.242-12.228,12.242H12.287c-6.766,0-12.242-5.477-12.242-12.242V12.219  C0.045,5.461,5.521,0,12.287,0h195.719c6.734,0,12.227,5.461,12.227,12.219L220.232,134.547"
+   id="path5"
+   style="fill:#998ec4;fill-opacity:1" />
+<polygon
+   fill="#FFFFFF"
+   points="115.029,111.727 98.725,58.859 82.404,111.727 67.748,111.727 51.428,58.859 35.115,111.727   20.443,111.727 44.068,35.07 58.756,35.07 75.076,87.938 91.365,35.07 106.061,35.07 129.725,111.727 "
+   id="polygon7" />
+<path
+   fill="#FFFFFF"
+   d="M167.607,56.069c-2.983,0-5.873,0.504-8.588,1.437l1.921-9.604h28.25v-13.25h-40.25l-7.75,42h0.298  c-0.007,0.028-0.018,0.055-0.025,0.083h13.59c0.011-0.028,0.024-0.055,0.036-0.083h0.102l0.088-0.441  c1.954-4.461,5.617-7.477,9.828-7.477c6.26,0,11.334,6.642,11.334,14.834s-5.074,14.834-11.334,14.834  c-5.519,0-10.11-5.164-11.122-12h-13.543c0.57,15.761,11.129,26.199,24.665,26.199c14.33,0,25.947-12.999,25.947-29.033  S181.937,56.069,167.607,56.069z"
+   id="path9" />
+</svg>

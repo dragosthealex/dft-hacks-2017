@@ -11,6 +11,34 @@ html, body, .container,  #map {
 	height: auto
 }
 
+.station_icon {
+	width: 32px;
+	height: 100px;
+	display: inline-block;
+	float: left;
+	margin: 0 14px 0 0;
+
+}
+
+.sparks {
+	margin: 16px 0 0 46px;
+	padding: 0 0 12px 0;
+	height: 80px;
+}
+
+.spark {
+	position: absolute;
+}
+
+.play_icon {
+	vertical-align: middle;
+	margin: -3px 8px 0 0;
+}
+
+.station_logo {
+	width: 32px;
+}
+
 .full-width {
 
  width:100%;
@@ -150,7 +178,7 @@ html, body, .container,  #map {
     padding: 0 0 4px 0
 }
 .left_col {
-    background: #ffffff
+    background: #151515
 }
 .nav-sm .container.body .col-md-3.left_col {
     min-height: 100%;
@@ -212,7 +240,7 @@ html, body, .container,  #map {
     background: none
 }
 .nav-sm>.nav.side-menu>li.active-sm>a {
-    color: #1ABB9C !important
+    color: #ffffff !important
 }
 .nav-sm .nav.side-menu li a i.toggle-up {
     display: none !important
@@ -245,15 +273,18 @@ html, body, .container,  #map {
     margin-bottom: 35px
 }
 .menu_section h3 {
-    padding-left: 15px;
     color: #fff;
-    text-transform: uppercase;
-    letter-spacing: .5px;
-    font-weight: bold;
-    font-size: 11px;
-    margin-bottom: 0;
-    margin-top: 0;
-    text-shadow: 1px 1px #000
+	font-family: Roboto-Mono, monospace;
+    font-size: 14px;
+    margin: 0px 12px 8px 0;
+	display: inline-block;
+}
+.menu_section h3.time {
+    color: #7f7f8e;
+	font-family: Roboto-Mono, monospace;
+    font-size: 14px;
+    margin: 12px 12px 0px 0;
+	display: inline-block;
 }
 .menu_section>ul {
     margin-top: 10px
@@ -360,9 +391,9 @@ body .container.body .right_col {
 	height: 100vh;
 }
 .nav_title {
-    width: 230px;
+    width: 300px;
     float: left;
-    background: #ffffff;
+    background: #151515;
     border-radius: 0;
     height: 57px
 }
@@ -728,15 +759,17 @@ a:focus {
     margin-top: 0
 }
 .nav.side-menu>li {
-    position: relative;
-    display: block;
-    cursor: pointer
+	border-top: 1px solid #292929;
+	border-bottom: 1px solid transparent;
+	font-family: Roboto-Mono, monospace;
+    cursor: pointer;
+	margin: 0px 0 0 20px;
+	padding: 24px 0;
 }
 .nav.side-menu>li>a {
-    margin-bottom: 6px
 }
 .nav.side-menu>li>a:hover {
-    color: #000000 !important
+    color: #ffffff !important
 }
 .nav.side-menu>li>a:hover,
 .nav>li>a:focus {
@@ -758,7 +791,6 @@ a:focus {
     bottom: auto;
     content: "";
     height: 8px;
-    left: 23px;
     margin-top: 15px;
     position: absolute;
     right: auto;
@@ -767,7 +799,7 @@ a:focus {
     border-radius: 50%
 }
 .nav-md ul.nav.child_menu li:after {
-    border-left: 1px solid #425668;
+    border-top: 1px solid #fff;
     bottom: 0;
     content: "";
     left: 27px;
@@ -776,8 +808,10 @@ a:focus {
 }
 .nav.side-menu>li>a,
 .nav.child_menu>li>a {
-    color: #000000;
-    font-weight: 500
+	font-family: 'Roboto Mono', monospace;
+	font-weight: 400;
+    color: #f4f4f4;
+	display: inline-block;
 }
 .nav.child_menu li li:hover,
 .nav.child_menu li li.active {
@@ -790,7 +824,7 @@ a:focus {
 .nav>li>a {
     position: relative;
     display: block;
-    padding: 13px 15px 12px
+    padding: 13px 15px 12px 0px
 }
 .nav.side-menu>li.current-page,
 .nav.side-menu>li.active {
