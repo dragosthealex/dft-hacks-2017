@@ -149,6 +149,8 @@ var initMap = function() {
     });
     map.data.loadGeoJson(
       '{{ url("/milan-grid.geojson") }}');
+
+
     map.data.setStyle(function(feature) {
         if(feature.getId() == "6058") {
             return {
@@ -157,12 +159,19 @@ var initMap = function() {
             }
         }
     });
-    var processData = function(zone_id) {
+    var first_unix = 0,
+    heatmap = {
+        "0": "#9ABF00",
+        "1": "#C2AD00",
+        "2": "#C67400",
+        "3": "#CA3A00",
+        "4": "#D20041",
+        "5": "#D900C6",
+        "6": "#6D00E1",
+        "7": "#2A00E5",
+    },
+    get_sorted_keys = function() {
         var a = day;
-        var graphData = {
-          "today": [],
-          "control": []
-        };
         var keys = []
         for(var k in a) {
             if(a.hasOwnProperty(k)) {
@@ -170,15 +179,38 @@ var initMap = function() {
             }
         }
         keys.sort();
-
+        first_unix = keys[0];
+        return keys;
+    },
+    set_style = function(timestamp) {
+        var zones = day[timestamp];
+        map.data.setStyle(function(feature) {
+            zn = zones[feature.getId()]
+            if(zn) {
+                // Color heatmap
+                return {
+                    fillColor: heatmap[zn["level"]],
+                }
+            } else {
+                fillColor: "transparent"
+            }
+        });
+    },
+    processData = function(zone_id, keys) {
+        var a = day;
+        var graphData = {
+          "today": [],
+          "control": []
+        };
         for(var i=0; i<keys.length; i++) {
             var k = keys[i];
             graphData["today"].push([i, a[k][zone_id]["density"]]);
         }
         return graphData;
     },
-    makeThePlot = function(zone_id) {
-        graphData = processData(zone_id);
+    last_x = 0,
+    makeThePlot = function(zone_id, keys) {
+        graphData = processData(zone_id, keys);
         // Create plot after video meta is loaded
         var options = {
                 series: {
@@ -192,7 +224,7 @@ var initMap = function() {
                     symbol: 'triangle',
                     showValuesRelativeToSeries: 0,
                     position: {
-                        x: 0.0,
+                        x: last_x,
                         y: 0.5
                     },
                     snapToPlot: 0
@@ -221,17 +253,26 @@ var initMap = function() {
                     color: '#f03b20',
                     points: {show: true},
                 }], options);
+                $("#graph").bind("cursorupdates", function(event, cursordata) {
+                    var index = Math.floor(cursordata[0].x),
+                        unix = parseInt(first_unix) + 600 * index;
+                    last_x = index;
+                    set_style(unix);
+                });
             };
         doPlot();
     };
-    // Add evt listener
+    var keys = get_sorted_keys();
     map.data.addListener("click", function(event) {
-        makeThePlot(event.feature.getId());
+        makeThePlot(event.feature.getId(), keys);
         console.log(event.feature.getId());
     });
-    makeThePlot(6058);
+    makeThePlot(6058, keys);
 }
-
+function pad (str, max) {
+  str = str.toString();
+  return str.length < max ? pad("0" + str, max) : str;
+}
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<?=env('MAPS_API_KEY')?>&callback=initMap">
 </script>
