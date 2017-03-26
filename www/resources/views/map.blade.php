@@ -390,7 +390,7 @@ var initMap = function() {
             },
             doPlot = function() {
                 // keep reference
-                $.plot($("#graph"), [
+                thePlot = $.plot($("#graph"), [
                 {
                     data: graphData["today"],
                     lines: { show: true, lineWidth: 1},
@@ -408,7 +408,7 @@ var initMap = function() {
                     color: 'transparent',
                     points: {show: false},
                 }], options);
-                thePlot = $("#graph").bind("cursorupdates", function(event, cursordata) {
+                $("#graph").bind("cursorupdates", function(event, cursordata) {
                     var index = Math.floor(cursordata[0].x),
                         unix = parseInt(first_unix) + 600 * index;
                     if (last_x != index) {
@@ -416,27 +416,31 @@ var initMap = function() {
                         set_style(unix);
                     }
                 });
-                $("#play-button").click(function() {
-                    if($(this).attr("data-status") == "playing") {
-                        // Stop
-                        console.log("stopping...")
-                        clearInterval($(this).attr("data-interval-id"));
-                        $(this).attr("data-status", "stopped");
-                    } else {
-                        // Play
-                        console.log("playing...")
-                        intervalId = setInterval(function() {
-                            thePlot.setCursor(thePlot.getCursors()[0], {
-                                position: {
-                                    x: last_x + 1,
-                                    y: 0.5
-                                }
-                            });
-                        }, 100);
-                        $(this).attr("data-status", "playing");
-                        $(this).attr("data-interval-id", intervalId);
-                    }
-                });
+                setTimeout(function() {
+                    $("#play-button").click(function() {
+                        if($(this).attr("data-status") == "playing") {
+                            // Stop
+                            console.log("stopping...")
+                            clearInterval($(this).attr("data-interval-id"));
+                            $(this).attr("data-status", "stopped");
+                            $(this).html("PLAY");
+                        } else {
+                            // Play
+                            console.log("playing...")
+                            intervalId = setInterval(function() {
+                                thePlot.setCursor(thePlot.getCursors()[0], {
+                                    position: {
+                                        x: last_x + 1,
+                                        y: 0.5
+                                    }
+                                });
+                            }, 200);
+                            $(this).attr("data-status", "playing");
+                            $(this).attr("data-interval-id", intervalId);
+                            $(this).html("STOP");
+                        }
+                    });
+                }, 1000);
             };
         doPlot();
     };
