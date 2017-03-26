@@ -12,13 +12,13 @@
     margin: 30px 30px 0;
 }
 #map {
-    height: 80vh;
+    height: 70vh;
     width: 100%;
 }
 #graph {
     width: 100%;
     padding: 5px;
-    height: 20vh;
+    height: 30vh;
     background: #151515;
 }
 .demo-placeholder {
@@ -291,8 +291,8 @@ var initMap = function() {
             // Get stations
             current_stations = stations[the_id]
             if(current_stations) {
-                stroke = "blue";
-                sWeight = "2";
+                stroke = "rgba(121,221,255, 0.6)";
+                sWeight = "1";
             } else {
                 stroke = "#333";
                 sWeight = "1;"
@@ -428,8 +428,8 @@ var initMap = function() {
             for(var i=0; i<current_stations.length; i++) {
                 s_li = $('<ul class="station"></ul>');
                 s = current_stations[i];
-                s_li.append($("<li>" + s['name'] + "</li>"));
-                s_li.append($("<li>" + s['lines'] + "</li>"));
+                s_li.append($("<li>Station: " + s['name'] + "</li>"));
+                s_li.append($("<li>Lines: " + s['lines'] + "</li>"));
                 $("#stations").append(s_li);
             }
         }
