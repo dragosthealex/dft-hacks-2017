@@ -53,6 +53,34 @@ def compile_json_files():
         f.close()
 
 
+def compile_json_files2():
+    data_dir = "data/final_2_files"
+    for x in os.listdir(data_dir):
+        f = open(data_dir + "/" + x, "r")
+        jsn = open(x.replace(".csv", "") + ".json", "w")
+        # Read the lines
+        lines = [line.replace("\n", "").split(",") for line in f.readlines()]
+        frames = {}
+        for line in tqdm(lines[1:]):
+            if len(line) != 6:
+                continue
+            unix = line[2]
+            zone = line[1]
+            level = line[4]
+            density = line[5]
+            # Put in json
+            frame_zone = {
+                "level": level,
+                "density": density
+            }
+            if unix not in frames:
+                frames[unix] = {}
+            frames[unix][zone] = frame_zone
+        jsn.write(json.dumps(frames))
+        jsn.close()
+        f.close()
+
+
 def create_json_stations():
     f = codecs.open("stations_enhanced.csv", "r", encoding="utf-8")
     jsn = codecs.open("stations.json", "w", encoding="utf-8")
@@ -77,7 +105,7 @@ def create_json_stations():
 
 
 def main():
-    compile_json_files()
+    compile_json_files2()
 
 if __name__ == '__main__':
     main()

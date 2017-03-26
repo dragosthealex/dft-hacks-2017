@@ -152,14 +152,14 @@ var initMap = function() {
 
     var first_unix = 0,
     heatmap = {
-        "0": "#9ABF00",
-        "1": "#C2AD00",
-        "2": "#C67400",
-        "3": "#CA3A00",
-        "4": "#D20041",
-        "5": "#D900C6",
-        "6": "#6D00E1",
-        "7": "#2A00E5",
+        "1": "#9ABF00",
+        "2": "#C2AD00",
+        "3": "#C67400",
+        "4": "#CA3A00",
+        "5": "#D20041",
+        "6": "#D900C6",
+        "7": "#6D00E1",
+        "8": "#2A00E5",
     },
     get_sorted_keys = function() {
         var a = day;
@@ -241,7 +241,8 @@ var initMap = function() {
                     min: 0,
                 },
                 yaxis: {
-                    min: 0
+                    min: 0,
+                    max: 100
                 },
                 clickable: false,
                 hoverable: false,
