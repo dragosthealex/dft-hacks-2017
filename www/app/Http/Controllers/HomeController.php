@@ -27,7 +27,7 @@ class HomeController extends Controller
     }
 
     public function map($day) {
-        ini_set('memory_limit', '512M'); 
+        ini_set('memory_limit', '1024M'); 
         return view('map')
             ->with("day", $day);
     }

@@ -52,8 +52,10 @@ var map;
 var thePlot;
 var stations = JSON.parse("<?=addcslashes(file_get_contents(url('json/stations.json')), '"')?>");
 var day = JSON.parse("<?=addcslashes(file_get_contents(url('json/m_' . $day . '.json')), '"')?>");
-console.log(day)
-console.log(stations)
+var control = JSON.parse("<?=addcslashes(file_get_contents(url('json/m_1205.json')), '"')?>");
+console.log(control);
+console.log(day);
+console.log(stations);
 var initMap = function() {
     var uluru = {lat: 45.483640, lng: 9.186667};
     map = new google.maps.Map(document.getElementById('map'), {
@@ -272,7 +274,7 @@ var initMap = function() {
         "2": "rgba(239,237,245, 0.3)",
         "1": "rgba(252,251,253, 0.2)",
     },
-    get_sorted_keys = function() {
+    get_sorted_keys_event = function() {
         var a = day;
         var keys = []
         for(var k in a) {
@@ -282,6 +284,17 @@ var initMap = function() {
         }
         keys.sort();
         first_unix = keys[0];
+        return keys;
+    },
+    get_sorted_keys_control = function() {
+        var a = control;
+        var keys = []
+        for(var k in a) {
+            if(a.hasOwnProperty(k)) {
+                keys.push(k);
+            }
+        }
+        keys.sort();
         return keys;
     },
     set_style = function(timestamp) {
@@ -316,21 +329,24 @@ var initMap = function() {
             }
         });
     },
-    processData = function(zone_id, keys) {
+    processData = function(zone_id, keys1, keys2) {
         var a = day;
+        var b = control;
         var graphData = {
           "today": [],
           "control": []
         };
-        for(var i=0; i<keys.length; i++) {
-            var k = keys[i];
-            graphData["today"].push([i, a[k][zone_id]["density"]]);
+        for(var i=0; i<keys1.length; i++) {
+            var k1 = keys1[i];
+            var k2 = keys2[i];
+            graphData["today"].push([i, a[k1][zone_id]["density"]]);
+            graphData["control"].push([i, b[k2][zone_id]["density"]]);
         }
         return graphData;
     },
     last_x = 0,
-    makeThePlot = function(zone_id, keys) {
-        graphData = processData(zone_id, keys);
+    makeThePlot = function(zone_id, keys1, keys2) {
+        graphData = processData(zone_id, keys1, keys2);
         // Create plot after video meta is loaded
         var options = {
                 series: {
@@ -354,7 +370,7 @@ var initMap = function() {
                 },
                 yaxis: {
                     min: 0,
-                    max: 100
+                    max: 100,
                     backgroundColor: '#151515',
                 },
                 shadowSize: 0,
@@ -370,7 +386,7 @@ var initMap = function() {
                     left: 10,
                     bottom: 10,
                     right: 10
-    }
+                }
             },
             doPlot = function() {
                 // keep reference
@@ -380,6 +396,12 @@ var initMap = function() {
                     lines: { show: true, lineWidth: 1},
                     curvedLines: {apply: false},
                     color: "#f9f9f9"
+                },
+                {
+                    data:graphData["control"],
+                    lines: { show: true, lineWidth: 1},
+                    curvedLines: {apply: false},
+                    color: "#aaa"
                 },
                 {
                     data: graphData["today"],
@@ -418,7 +440,8 @@ var initMap = function() {
             };
         doPlot();
     };
-    var keys = get_sorted_keys();
+    var keys1 = get_sorted_keys_event();
+    var keys2 = get_sorted_keys_control();
     map.data.addListener("click", function(event) {
         $("#stations").html("");
         // Append html stations
@@ -433,10 +456,10 @@ var initMap = function() {
                 $("#stations").append(s_li);
             }
         }
-        makeThePlot(event.feature.getId(), keys);
+        makeThePlot(event.feature.getId(), keys1, keys2);
         console.log(event.feature.getId());
     });
-    makeThePlot(6058, keys);
+    makeThePlot(6058, keys1, keys2);
     set_style(first_unix);
 }
 function pad (str, max) {

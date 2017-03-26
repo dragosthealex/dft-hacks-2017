@@ -37,10 +37,8 @@
               <div class="menu_section">
                 <ul class="nav side-menu">
                   <li>
-                    <a href="{{ url('/map/1107?s=6058') }}"><img src='https://icon.now.sh/map/24/000000' alt='map icon' /> 11.07.2013 (meh)</span></a>
-                    <a href="{{ url('/map/1205?s=6058') }}"><img src='https://icon.now.sh/map/24/000000' alt='map icon' /> 12.05.2013</span></a>
                     <a href="{{ url('/map/1207?s=6058') }}"><img src='https://icon.now.sh/map/24/000000' alt='map icon' /> 12.07.2013</span></a>
-                    <a id="play-button" data-status="stopped" data-interval-id="">PLAY THAT MADAFAKA</a>
+                    <a id="play-button" data-status="stopped" data-interval-id="">PLAY</a>
                   </li>
                 </ul>
                 <ul class="stations-list" id="stations"></ul>
