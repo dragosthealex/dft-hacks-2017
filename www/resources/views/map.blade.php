@@ -53,7 +53,7 @@ var day = JSON.parse("<?=addcslashes(file_get_contents(url('json/m_' . $day . '.
 console.log(day)
 console.log(stations)
 var initMap = function() {
-    var uluru = {lat: 45.466565, lng: 9.185970};
+    var uluru = {lat: 45.483640, lng: 9.186667};
     map = new google.maps.Map(document.getElementById('map'), {
       zoom: 15,
       clickableIcons: false,
