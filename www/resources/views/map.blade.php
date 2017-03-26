@@ -260,15 +260,6 @@ var initMap = function() {
       '{{ url("/milan-grid.geojson") }}');
 
 
-    map.data.setStyle(function(feature) {
-        if(feature.getId() == "6058") {
-            return {
-                fillColor: "red",
-                clickable: true,
-                strokeWeight: 0.5
-            }
-        }
-    });
     var first_unix = 0,
     heatmap = {
         "7": "rgba(74,20,134, 0.6)",
@@ -295,17 +286,32 @@ var initMap = function() {
     set_style = function(timestamp) {
         var zones = day[timestamp];
         map.data.setStyle(function(feature) {
-            zn = zones[feature.getId()]
+            the_id = feature.getId();
+            // Get stations
+            current_stations = stations[the_id]
+            if(current_stations) {
+                stroke = "blue";
+                sWeight = "2";
+            } else {
+                stroke = "#333";
+                sWeight = "1;"
+            }
+            // Get the zone
+            zn = zones[the_id]
             if(zn) {
                 // Color heatmap
                 return {
                     fillColor: heatmap[zn["level"]],
                     fillOpacity: '1',
-                    strokeWeight: 0.5,
-                    strokeColor: 'rgba(0,0,0, 0.2)'
+                    strokeColor: stroke,
+                    strokeWeight: sWeight
                 }
             } else {
-                fillColor: "transparent"
+                return {
+                    fillColor: "transparent",
+                    strokeColor: stroke,
+                    strokeWeight: sWeight
+                }
             }
         });
     },
@@ -327,7 +333,7 @@ var initMap = function() {
         // Create plot after video meta is loaded
         var options = {
                 series: {
-                    
+
                 },
                 cursors: [{
                     name: 'Player',
@@ -381,18 +387,34 @@ var initMap = function() {
                 $("#graph").bind("cursorupdates", function(event, cursordata) {
                     var index = Math.floor(cursordata[0].x),
                         unix = parseInt(first_unix) + 600 * index;
-                    last_x = index;
-                    set_style(unix);
+                    if (last_x != index) {
+                        last_x = index;
+                        set_style(unix);
+                    }
                 });
             };
         doPlot();
     };
     var keys = get_sorted_keys();
     map.data.addListener("click", function(event) {
+        $("#stations").html("");
+        // Append html stations
+        the_id = event.feature.getId();
+        current_stations = stations[the_id]
+        if(current_stations) {
+            for(var i=0; i<current_stations.length; i++) {
+                s_li = $('<ul class="station"></ul>');
+                s = current_stations[i];
+                s_li.append($("<li>" + s['name'] + "</li>"));
+                s_li.append($("<li>" + s['lines'] + "</li>"));
+                $("#stations").append(s_li);
+            }
+        }
         makeThePlot(event.feature.getId(), keys);
         console.log(event.feature.getId());
     });
     makeThePlot(6058, keys);
+    set_style(first_unix);
 }
 function pad (str, max) {
   str = str.toString();

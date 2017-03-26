@@ -36,12 +36,12 @@
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <ul class="nav side-menu">
-
                   <li>
                     <a href="{{ url('/map/1107?s=6058') }}"><img src='https://icon.now.sh/map/24/000000' alt='map icon' /> 11.07.2013</span></a>
                     <a href="{{ url('/map/1207?s=6058') }}"><img src='https://icon.now.sh/map/24/000000' alt='map icon' /> 12.07.2013</span></a>
                   </li>
                 </ul>
+                <ul class="stations-list" id="stations"></ul>
               </div>
             </div>
             <!-- /sidebar menu -->
