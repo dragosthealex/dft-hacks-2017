@@ -29,7 +29,7 @@ Route::get('/oauth/callback/{provider}', 'Auth\OAuthController@handleProviderCal
 Route::get('/oauth/success/{provider}', 'Auth\OAuthController@success');
 
 Route::get('/', function () {
-    return redirect()->to('/map');
+    return redirect()->to('/home');
 });
 Route::get('/home', 'HomeController@index');
-Route::get('/map', 'HomeController@map');
+Route::get('/map/{day}', 'HomeController@map');
