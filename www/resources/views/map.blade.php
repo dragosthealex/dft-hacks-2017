@@ -348,6 +348,14 @@ var initMap = function() {
     makeThePlot = function(zone_id, keys1, keys2) {
         graphData = processData(zone_id, keys1, keys2);
         // Create plot after video meta is loaded
+        var ts = [];
+        for(i=0; i<144; i+= 10) {
+            minutes = i * 10;
+            hours = Math.floor(minutes / 60);
+            minutes = Math.floor(minutes % 60);
+            ts.push([i, hours + ":" + minutes]);
+        }
+
         var options = {
                 series: {
 
@@ -367,6 +375,7 @@ var initMap = function() {
                 }],
                 xaxis: {
                     min: 0,
+                    ticks: ts
                 },
                 yaxis: {
                     min: 0,
@@ -395,13 +404,15 @@ var initMap = function() {
                     data: graphData["today"],
                     lines: { show: true, lineWidth: 1},
                     curvedLines: {apply: false},
-                    color: "#f9f9f9"
+                    color: "#f9f9f9",
+                    label: "Today"
                 },
                 {
                     data:graphData["control"],
                     lines: { show: true, lineWidth: 1},
                     curvedLines: {apply: false},
-                    color: "#aaa"
+                    color: "#aaa",
+                    label: "Control"
                 },
                 {
                     data: graphData["today"],
