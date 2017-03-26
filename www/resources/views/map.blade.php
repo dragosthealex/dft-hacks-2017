@@ -311,7 +311,7 @@ var initMap = function() {
                 sWeight = "1;"
             }
             // Get the zone
-            zn = zones[the_id]
+            zn = zones[the_id];
             if(zn) {
                 // Color heatmap
                 return {
@@ -416,31 +416,6 @@ var initMap = function() {
                         set_style(unix);
                     }
                 });
-                setTimeout(function() {
-                    $("#play-button").click(function() {
-                        if($(this).attr("data-status") == "playing") {
-                            // Stop
-                            console.log("stopping...")
-                            clearInterval($(this).attr("data-interval-id"));
-                            $(this).attr("data-status", "stopped");
-                            $(this).html("PLAY");
-                        } else {
-                            // Play
-                            console.log("playing...")
-                            intervalId = setInterval(function() {
-                                thePlot.setCursor(thePlot.getCursors()[0], {
-                                    position: {
-                                        x: last_x + 1,
-                                        y: 0.5
-                                    }
-                                });
-                            }, 200);
-                            $(this).attr("data-status", "playing");
-                            $(this).attr("data-interval-id", intervalId);
-                            $(this).html("STOP");
-                        }
-                    });
-                }, 1000);
             };
         doPlot();
     };
@@ -465,6 +440,32 @@ var initMap = function() {
     });
     makeThePlot(6058, keys1, keys2);
     set_style(first_unix);
+    // Add play stuff
+    setTimeout(function() {
+                    $("#play-button").click(function() {
+                        if($(this).attr("data-status") == "playing") {
+                            // Stop
+                            console.log("stopping...")
+                            clearInterval($(this).attr("data-interval-id"));
+                            $(this).attr("data-status", "stopped");
+                            $(this).html("PLAY");
+                        } else {
+                            // Play
+                            console.log("playing...")
+                            intervalId = setInterval(function() {
+                                thePlot.setCursor(thePlot.getCursors()[0], {
+                                    position: {
+                                        x: last_x + 1,
+                                        y: 0.5
+                                    }
+                                });
+                            }, 200);
+                            $(this).attr("data-status", "playing");
+                            $(this).attr("data-interval-id", intervalId);
+                            $(this).html("STOP");
+                        }
+                    });
+                }, 1000);
 }
 function pad (str, max) {
   str = str.toString();
